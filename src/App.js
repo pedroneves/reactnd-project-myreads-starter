@@ -13,7 +13,6 @@ class BooksApp extends React.Component {
 	loadBooks = () => {
 		BooksAPI.getAll()
 			.then(books => {
-				console.log(books)
 				this.setState(() => {
 					return { books }
 				})
