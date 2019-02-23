@@ -26,11 +26,15 @@ class SearchPage extends Component {
 					searchedBooks = []
 				}
 
-				searchedBooks = searchedBooks.map(book => {
-					const userBook = this.props.userBooks.find(userBook => userBook.id === book.id)
-					book.shelf = Lodash.get(userBook, 'shelf');
-					return book
-				})
+				searchedBooks = searchedBooks
+					.filter(book => {
+						return book && book.imageLinks && book.imageLinks.smallThumbnail
+					})
+					.map(book => {
+						const userBook = this.props.userBooks.find(userBook => userBook.id === book.id)
+						book.shelf = Lodash.get(userBook, 'shelf');
+						return book
+					})
 
 				this.setState(() => ({ searchedBooks, isSearching }))
 			})
