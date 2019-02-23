@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Shelf from './Shelf'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 class MainPage extends Component {
 	render () {
-		const { shelves, books } = this.props;
+		const { shelves, books, onBookShelfChange } = this.props
 
 		return (
 			<div className="list-books">
@@ -18,14 +18,12 @@ class MainPage extends Component {
 								key={shelf.id}
 								title={shelf.title}
 								books={books.filter(book => book.shelf === shelf.id)}
+								onBookShelfChange={onBookShelfChange}
 							/>
 						))
 					}
 				</div>
-				<Link
-					to='/search'
-					className="open-search"
-				>
+				<Link to='/search' className="open-search">
 					<button >Add a book</button>
 				</Link>
 			</div>
@@ -33,4 +31,4 @@ class MainPage extends Component {
 	}
 }
 
-export default MainPage;
+export default MainPage

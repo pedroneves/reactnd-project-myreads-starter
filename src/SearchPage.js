@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-import Shelf from './Shelf'
-import Lodash from 'lodash';
+import Lodash from 'lodash'
+import Book from './Book'
 
 class SearchPage extends Component {
 	state = {
@@ -19,12 +19,18 @@ class SearchPage extends Component {
 					return
 				}
 
-				const isSearching = false;
-				let searchedBooks = response;
+				const isSearching = false
+				let searchedBooks = response
 
 				if (response.error) {
-					searchedBooks = [];
+					searchedBooks = []
 				}
+
+				searchedBooks = searchedBooks.map(book => {
+					const userBook = this.props.userBooks.find(userBook => userBook.id === book.id)
+					book.shelf = Lodash.get(userBook, 'shelf');
+					return book
+				})
 
 				this.setState(() => ({ searchedBooks, isSearching }))
 			})
@@ -43,15 +49,16 @@ class SearchPage extends Component {
 		const query = event.target.value
 
 		if (query === '') {
-			return this.reset();
+			return this.reset()
 		}
 
 		this.setState(() => ({query, isSearching: true, hasSearched: true}))
-		this.search(query);
+		this.search(query)
 	}
 
 	render () {
-		const { query, searchedBooks, hasSearched, isSearching } = this.state;
+		const { onBookShelfChange } = this.props
+		const { query, searchedBooks, hasSearched, isSearching } = this.state
 
 		return (
 			<div className="search-books">
@@ -79,11 +86,22 @@ class SearchPage extends Component {
 				</div>
 
 				<div className="search-books-results" style={{ paddingTop: '10px' }}>
-					<Shelf books={searchedBooks} />
+					<ol className="books-grid">
+						{
+							searchedBooks.map(book => (
+								<li key={book.id}>
+									<Book
+										book={book}
+										onBookShelfChange={onBookShelfChange}
+									/>
+								</li>
+							))
+						}
+					</ol>
 				</div>
 			</div>
 		)
 	}
 }
 
-export default SearchPage;
+export default SearchPage

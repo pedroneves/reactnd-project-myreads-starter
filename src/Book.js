@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import BookControls from './BookControls';
+import React, { Component } from 'react'
+import BookControls from './BookControls'
 
 class Book extends Component {
+
 	render () {
 		const { book } = this.props
-		const { title, authors=[] } = book;
+		const { title, authors=[] } = book
 
 		return (
 			<div className="book">
@@ -18,7 +19,12 @@ class Book extends Component {
 						}}>
 					</div>
 					<div className="book-shelf-changer">
-						<BookControls book={book} />
+						<BookControls
+							currentShelf={book.shelf}
+							onBookShelfChange={(shelfId) => {
+								this.props.onBookShelfChange(this.props.book, shelfId)
+							}}
+						/>
 					</div>
 				</div>
 				<div className="book-title">{title}</div>
@@ -28,4 +34,4 @@ class Book extends Component {
 	}
 }
 
-export default Book;
+export default Book
