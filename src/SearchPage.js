@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Lodash from 'lodash'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 class SearchPage extends Component {
 	state = {
@@ -106,6 +107,11 @@ class SearchPage extends Component {
 			</div>
 		)
 	}
+}
+
+SearchPage.propTypes = {
+	userBooks: PropTypes.array.isRequired,
+	onBookShelfChange: PropTypes.func
 }
 
 export default SearchPage

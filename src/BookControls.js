@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class BookControls extends Component {
 
@@ -20,6 +21,11 @@ class BookControls extends Component {
 			</select>
 		)
 	}
+}
+
+BookControls.propTypes = {
+	currentShelf: PropTypes.string,
+	onBookShelfChange: PropTypes.func,
 }
 
 export default BookControls

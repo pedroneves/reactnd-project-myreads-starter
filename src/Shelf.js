@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 class Shelf extends Component {
 	render () {
@@ -22,6 +23,12 @@ class Shelf extends Component {
 			</div>
 		)
 	}
+}
+
+Shelf.propTypes = {
+	title: PropTypes.string,
+	books: PropTypes.array.isRequired,
+	onBookShelfChange: PropTypes.func
 }
 
 export default Shelf
