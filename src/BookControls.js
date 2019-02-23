@@ -4,8 +4,10 @@ import PropTypes from 'prop-types'
 class BookControls extends Component {
 
 	handleShelfChange = (event) => {
-		const shelfId = event.target.value
-		this.props.onBookShelfChange(shelfId)
+		const shelfId = event.target.value;
+		if (this.props.onBookShelfChange) {
+			this.props.onBookShelfChange(shelfId)
+		}
 	}
 
 	render () {

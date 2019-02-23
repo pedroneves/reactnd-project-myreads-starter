@@ -23,7 +23,9 @@ class Book extends Component {
 						<BookControls
 							currentShelf={book.shelf}
 							onBookShelfChange={(shelfId) => {
-								this.props.onBookShelfChange(this.props.book, shelfId)
+								if (this.props.onBookShelfChange) {
+									this.props.onBookShelfChange(this.props.book, shelfId)
+								}
 							}}
 						/>
 					</div>
